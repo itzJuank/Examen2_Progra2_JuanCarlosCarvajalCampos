@@ -3,3 +3,4 @@
 - Ajuste v1.1: implementación del registro de salida, cálculo de monto, persistencia en historial y actualización de tablas.
 - Ajuste v1.2: mejora visual de paneles, uso de mensajes con color y confirmación de eliminación mediante JDialog personalizado.
 - Ajuste posterior: endurecimiento de la validación de placas y sincronización del proyecto con los metadatos actuales de NetBeans.
+- Ajuste posterior: eliminación de la migración a NetBeans para dejar el proyecto como Java + Ant standalone.

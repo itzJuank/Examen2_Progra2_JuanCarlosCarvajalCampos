@@ -2,7 +2,7 @@
 
 ## Sistema de Gestión de Parqueo Público
 
-Aplicación de escritorio en Java Swing para registrar ingresos, salidas, cobros y consultar el historial de un parqueo público. El proyecto está preparado para abrirse en NetBeans y compilarse con Apache Ant.
+Aplicación de escritorio en Java Swing para registrar ingresos, salidas, cobros y consultar el historial de un parqueo público. El proyecto queda como aplicación Java standalone compilable con Apache Ant.
 
 ## Regla de validación de placas
 
@@ -11,13 +11,6 @@ La placa debe cumplir estas condiciones:
 - Contener al menos una letra y al menos un número
 - Usar solo letras mayúsculas, números o guion `-`
 - No incluir espacios
-
-## Instrucciones para abrir en NetBeans
-
-1. Abrir NetBeans.
-2. Seleccionar **File > Open Project**.
-3. Elegir la carpeta del repositorio.
-4. NetBeans reconocerá el proyecto como **Java con Ant** usando los archivos dentro de `nbproject/`.
 
 ## Instrucciones para compilar con Ant
 
@@ -39,16 +32,11 @@ ant run
 ├── README.md
 ├── build.xml
 ├── manifest.mf
-├── nbproject/
-│   ├── project.properties
-│   ├── build-impl.xml
-│   └── genfiles.properties
-│   └── project.xml
 ├── prompts.txt
 └── src/
     └── com/parqueo/
         ├── datos/
-        │   ├── ArchivoHelper.java
+            │   ├── ArchivoHelper.java
         │   ├── RegistroDAO.java
         │   └── VehiculoDAO.java
         ├── entidades/
@@ -58,9 +46,12 @@ ant run
         │   ├── ParqueoService.java
         │   └── Validador.java
         └── presentacion/
+            ├── EstilosUI.java
             ├── MainFrame.java
             ├── PanelActivos.java
+            ├── PanelDecorativoIngreso.java
             ├── PanelHistorial.java
             ├── PanelIngreso.java
+            ├── PanelTarjeta.java
             └── PanelSalida.java
 ```

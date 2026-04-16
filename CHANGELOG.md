@@ -1,5 +1,10 @@
 ## CHANGELOG
 
+### v1.2.2 - Eliminación de metadatos de NetBeans
+- Se eliminó la carpeta `nbproject` del repositorio
+- `build.xml` volvió a una configuración Ant independiente
+- README y configuración del proyecto ajustados para ejecución standalone
+
 ### v1.2.1 - Ajustes de validación y sincronización con NetBeans
 - Validación de placa reforzada para aceptar solo formatos alfanuméricos válidos
 - Mensaje de error de placa actualizado para orientar al usuario

@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="ParqueoPublico" default="default" basedir=".">
-    <description>Proyecto Java SE compatible con NetBeans para el sistema de parqueo.</description>
-    <import file="nbproject/build-impl.xml"/>
+<project name="ParqueoPublico" default="jar" basedir=".">
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="main.class" value="com.parqueo.presentacion.MainFrame"/>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false"
+               source="1.8" target="1.8" encoding="UTF-8"/>
+        <copy todir="${classes.dir}">
+            <fileset dir="${src.dir}" excludes="**/*.java"/>
+        </copy>
+    </target>
+
+    <target name="jar" depends="clean,compile">
+        <mkdir dir="${dist.dir}"/>
+        <jar destfile="${dist.dir}/parqueo.jar" basedir="${classes.dir}" manifest="manifest.mf"/>
+    </target>
+
+    <target name="run" depends="compile">
+        <java classname="${main.class}" fork="true" failonerror="true">
+            <classpath>
+                <pathelement path="${classes.dir}"/>
+            </classpath>
+        </java>
+    </target>
 </project>
