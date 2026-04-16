@@ -3,16 +3,16 @@ package com.parqueo.presentacion;
 import com.parqueo.entidades.Registro;
 import com.parqueo.negocio.ParqueoService;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.border.EmptyBorder;
 
 public class PanelSalida extends JPanel {
     private static final DateTimeFormatter FORMATO = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
@@ -23,12 +23,14 @@ public class PanelSalida extends JPanel {
     private final JTable tabla;
     private final JLabel lblMonto;
     private final JLabel lblMensaje;
+    private final JLabel lblResumen;
 
     public PanelSalida(ParqueoService service, PanelActivos panelActivos, PanelHistorial panelHistorial) {
         this.service = service;
         this.panelActivos = panelActivos;
         this.panelHistorial = panelHistorial;
-        setLayout(new BorderLayout(10, 10));
+        setLayout(new BorderLayout(0, 18));
+        setOpaque(false);
 
         modelo = new DefaultTableModel(new Object[]{"ID", "Placa", "Tipo", "Hora de Entrada"}, 0) {
             @Override
@@ -37,46 +39,63 @@ public class PanelSalida extends JPanel {
             }
         };
         tabla = new JTable(modelo);
-        tabla.setRowHeight(24);
-        lblMonto = new JLabel("Monto a pagar: ₡0.0");
+        EstilosUI.configurarTabla(tabla);
+        lblMonto = EstilosUI.crearIndicadorMonto("Monto a pagar: " + EstilosUI.formatearMonto(0.0));
         lblMensaje = new JLabel(" ");
+        lblResumen = EstilosUI.crearChip("0 pendientes", EstilosUI.COLOR_ACENTO_SUAVE, EstilosUI.COLOR_PRIMARIO_OSCURO);
 
         JButton btnRegistrarSalida = new JButton("Registrar salida");
         btnRegistrarSalida.addActionListener(e -> registrarSalida());
+        EstilosUI.configurarBotonPrimario(btnRegistrarSalida);
+        EstilosUI.mostrarMensajeInformativo(lblMensaje, "Seleccione un activo para calcular el cobro y moverlo al historial.");
 
-        JPanel panelSuperior = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        panelSuperior.add(new JLabel("Seleccione un vehículo activo para registrar su salida"));
+        PanelTarjeta cabecera = new PanelTarjeta(new BorderLayout(16, 12), EstilosUI.COLOR_PANEL);
+        cabecera.setBorder(new EmptyBorder(20, 20, 20, 20));
 
-        JPanel panelInferior = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        panelInferior.add(btnRegistrarSalida);
-        panelInferior.add(lblMonto);
-        panelInferior.add(lblMensaje);
+        JPanel textos = new JPanel(new GridLayout(3, 1, 0, 8));
+        textos.setOpaque(false);
+        textos.add(EstilosUI.crearTitulo("Registro de salida"));
+        textos.add(EstilosUI.crearSubtitulo("Procese el cobro, libere el espacio y actualice el historial de movimientos."));
+        textos.add(lblMensaje);
 
-        add(panelSuperior, BorderLayout.NORTH);
-        add(new JScrollPane(tabla), BorderLayout.CENTER);
-        add(panelInferior, BorderLayout.SOUTH);
+        JPanel acciones = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
+        acciones.setOpaque(false);
+        acciones.add(lblResumen);
+        acciones.add(btnRegistrarSalida);
+
+        JPanel cabeceraSuperior = new JPanel(new BorderLayout(12, 12));
+        cabeceraSuperior.setOpaque(false);
+        cabeceraSuperior.add(textos, BorderLayout.CENTER);
+        cabeceraSuperior.add(acciones, BorderLayout.EAST);
+
+        cabecera.add(cabeceraSuperior, BorderLayout.NORTH);
+        cabecera.add(lblMonto, BorderLayout.SOUTH);
+
+        PanelTarjeta contenedorTabla = new PanelTarjeta(new BorderLayout(), EstilosUI.COLOR_PANEL);
+        contenedorTabla.setBorder(new EmptyBorder(18, 18, 18, 18));
+        contenedorTabla.add(EstilosUI.crearScrollTabla(tabla), BorderLayout.CENTER);
+
+        add(cabecera, BorderLayout.NORTH);
+        add(contenedorTabla, BorderLayout.CENTER);
         refrescarTabla();
     }
 
     private void registrarSalida() {
         int fila = tabla.getSelectedRow();
         if (fila < 0) {
-            lblMensaje.setForeground(Color.RED);
-            lblMensaje.setText("Seleccione un registro activo para procesar la salida");
+            EstilosUI.mostrarMensajeError(lblMensaje, "Seleccione un registro activo para procesar la salida");
             return;
         }
         String id = String.valueOf(tabla.getValueAt(fila, 0));
         try {
             Registro registro = service.registrarSalida(id);
-            lblMonto.setText("Monto a pagar: ₡" + registro.getMonto());
-            lblMensaje.setForeground(new Color(0, 128, 0));
-            lblMensaje.setText("Salida registrada correctamente");
+            lblMonto.setText("Monto a pagar: " + EstilosUI.formatearMonto(registro.getMonto()));
+            EstilosUI.mostrarMensajeExito(lblMensaje, "Salida registrada correctamente");
             refrescarTabla();
             panelActivos.refrescarTabla();
             panelHistorial.refrescarTabla();
         } catch (Exception ex) {
-            lblMensaje.setForeground(Color.RED);
-            lblMensaje.setText(ex.getMessage());
+            EstilosUI.mostrarMensajeError(lblMensaje, ex.getMessage());
         }
     }
 
@@ -91,5 +110,6 @@ public class PanelSalida extends JPanel {
                 registro.getHoraEntrada().format(FORMATO)
             });
         }
+        lblResumen.setText(activos.size() + (activos.size() == 1 ? " pendiente" : " pendientes"));
     }
 }
