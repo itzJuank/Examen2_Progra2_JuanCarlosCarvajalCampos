@@ -9,6 +9,7 @@ Aplicación de escritorio en Java Swing para registrar ingresos, salidas, cobros
 1. Abrir NetBeans.
 2. Seleccionar **File > Open Project**.
 3. Elegir la carpeta del repositorio.
+4. NetBeans reconocerá el proyecto como **Java con Ant** usando los archivos dentro de `nbproject/`.
 
 ## Instrucciones para compilar con Ant
 
