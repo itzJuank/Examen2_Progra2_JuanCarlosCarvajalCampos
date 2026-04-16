@@ -20,7 +20,8 @@ public class ParqueoService {
     }
 
     public Registro registrarIngreso(String placa, String tipo) {
-        if (!Validador.placaValida(placa)) {
+        String placaNormalizada = placa == null ? null : placa.trim().toUpperCase();
+        if (!Validador.placaValida(placaNormalizada)) {
             throw new IllegalArgumentException("La placa es obligatoria");
         }
         if (!Validador.tipoValido(tipo)) {
@@ -28,11 +29,11 @@ public class ParqueoService {
         }
 
         List<Registro> activos = vehiculoDAO.obtenerActivos();
-        if (Validador.placaYaActiva(placa, activos)) {
+        if (Validador.placaYaActiva(placaNormalizada, activos)) {
             throw new IllegalStateException("El vehículo ya se encuentra registrado en el parqueo");
         }
 
-        Vehiculo vehiculo = new Vehiculo(placa, tipo);
+        Vehiculo vehiculo = new Vehiculo(placaNormalizada, tipo);
         Registro registro = new Registro(vehiculo, LocalDateTime.now());
         registro.setActivo(true);
         registro.setHoraSalida(null);

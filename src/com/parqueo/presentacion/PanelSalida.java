@@ -37,17 +37,22 @@ public class PanelSalida extends JPanel {
             }
         };
         tabla = new JTable(modelo);
+        tabla.setRowHeight(24);
         lblMonto = new JLabel("Monto a pagar: ₡0.0");
         lblMensaje = new JLabel(" ");
 
         JButton btnRegistrarSalida = new JButton("Registrar salida");
         btnRegistrarSalida.addActionListener(e -> registrarSalida());
 
+        JPanel panelSuperior = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panelSuperior.add(new JLabel("Seleccione un vehículo activo para registrar su salida"));
+
         JPanel panelInferior = new JPanel(new FlowLayout(FlowLayout.LEFT));
         panelInferior.add(btnRegistrarSalida);
         panelInferior.add(lblMonto);
         panelInferior.add(lblMensaje);
 
+        add(panelSuperior, BorderLayout.NORTH);
         add(new JScrollPane(tabla), BorderLayout.CENTER);
         add(panelInferior, BorderLayout.SOUTH);
         refrescarTabla();

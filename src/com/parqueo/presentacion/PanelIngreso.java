@@ -2,6 +2,7 @@ package com.parqueo.presentacion;
 
 import com.parqueo.entidades.Registro;
 import com.parqueo.negocio.ParqueoService;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -26,7 +27,9 @@ public class PanelIngreso extends JPanel {
     public PanelIngreso(ParqueoService service, PanelActivos panelActivos) {
         this.service = service;
         this.panelActivos = panelActivos;
-        setLayout(new GridBagLayout());
+        setLayout(new BorderLayout());
+
+        JPanel formulario = new JPanel(new GridBagLayout());
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(8, 8, 8, 8);
@@ -42,38 +45,41 @@ public class PanelIngreso extends JPanel {
 
         gbc.gridx = 0;
         gbc.gridy = 0;
-        add(new JLabel("Placa:"), gbc);
+        formulario.add(new JLabel("Placa:"), gbc);
 
         gbc.gridx = 1;
-        add(txtPlaca, gbc);
+        formulario.add(txtPlaca, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
-        add(new JLabel("Tipo:"), gbc);
+        formulario.add(new JLabel("Tipo:"), gbc);
 
         gbc.gridx = 1;
-        add(cmbTipo, gbc);
+        formulario.add(cmbTipo, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 2;
-        add(new JLabel("Hora actual:"), gbc);
+        formulario.add(new JLabel("Hora actual:"), gbc);
 
         gbc.gridx = 1;
-        add(lblHoraEntrada, gbc);
+        formulario.add(lblHoraEntrada, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.gridwidth = 2;
-        add(btnRegistrar, gbc);
+        formulario.add(btnRegistrar, gbc);
 
         gbc.gridy = 4;
-        add(lblMensaje, gbc);
+        formulario.add(lblMensaje, gbc);
+
+        add(formulario, BorderLayout.NORTH);
     }
 
     private void registrarIngreso() {
         lblHoraEntrada.setText(FORMATO.format(LocalDateTime.now()));
         try {
-            Registro registro = service.registrarIngreso(txtPlaca.getText(), (String) cmbTipo.getSelectedItem());
+            String placa = txtPlaca.getText() == null ? "" : txtPlaca.getText().trim().toUpperCase();
+            Registro registro = service.registrarIngreso(placa, (String) cmbTipo.getSelectedItem());
             lblMensaje.setForeground(new Color(0, 128, 0));
             lblMensaje.setText("Ingreso registrado correctamente");
             lblHoraEntrada.setText(FORMATO.format(registro.getHoraEntrada()));

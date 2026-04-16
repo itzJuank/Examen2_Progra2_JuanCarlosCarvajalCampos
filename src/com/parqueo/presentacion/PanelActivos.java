@@ -3,9 +3,11 @@ package com.parqueo.presentacion;
 import com.parqueo.entidades.Registro;
 import com.parqueo.negocio.ParqueoService;
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -29,11 +31,16 @@ public class PanelActivos extends JPanel {
             }
         };
         tabla = new JTable(modelo);
+        tabla.setRowHeight(24);
         btnRefrescar = new JButton("Refrescar");
         btnRefrescar.addActionListener(e -> refrescarTabla());
 
+        JPanel panelSuperior = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panelSuperior.add(new JLabel("Vehículos actualmente en parqueo"));
+        panelSuperior.add(btnRefrescar);
+
+        add(panelSuperior, BorderLayout.NORTH);
         add(new JScrollPane(tabla), BorderLayout.CENTER);
-        add(btnRefrescar, BorderLayout.SOUTH);
         refrescarTabla();
     }
 

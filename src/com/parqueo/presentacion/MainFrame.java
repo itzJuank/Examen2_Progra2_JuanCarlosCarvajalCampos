@@ -1,6 +1,7 @@
 package com.parqueo.presentacion;
 
 import com.parqueo.negocio.ParqueoService;
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
@@ -28,7 +29,8 @@ public class MainFrame extends JFrame {
             panelSalida.refrescarTabla();
             panelHistorial.refrescarTabla();
         });
-        add(tabs);
+        setLayout(new BorderLayout());
+        add(tabs, BorderLayout.CENTER);
     }
 
     public static void main(String[] args) {

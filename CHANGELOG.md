@@ -1,5 +1,11 @@
 ## CHANGELOG
 
+### v1.2 - Mejoras de interfaz y validaciones
+- Mensajes de error y éxito con color directamente en los paneles (sin JOptionPane)
+- Confirmación de eliminación mediante JDialog personalizado
+- Mejoras de layout y alineación en todos los formularios
+- Validaciones reforzadas en campos obligatorios
+
 ### v1.1 - Registro de salida y cálculo de cobro
 - Registro de salida con hora automática
 - Cálculo de monto: ₡500 por hora o fracción, mínimo una hora

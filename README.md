@@ -24,14 +24,30 @@ ant run
 
 ```text
 .
+├── CHANGELOG.md
+├── README.md
 ├── build.xml
 ├── manifest.mf
 ├── nbproject/
-├── src/
-│   └── com/parqueo/
-│       ├── datos/
-│       ├── entidades/
-│       ├── negocio/
-│       └── presentacion/
-└── data/
+│   ├── project.properties
+│   └── project.xml
+├── prompts.txt
+└── src/
+    └── com/parqueo/
+        ├── datos/
+        │   ├── ArchivoHelper.java
+        │   ├── RegistroDAO.java
+        │   └── VehiculoDAO.java
+        ├── entidades/
+        │   ├── Registro.java
+        │   └── Vehiculo.java
+        ├── negocio/
+        │   ├── ParqueoService.java
+        │   └── Validador.java
+        └── presentacion/
+            ├── MainFrame.java
+            ├── PanelActivos.java
+            ├── PanelHistorial.java
+            ├── PanelIngreso.java
+            └── PanelSalida.java
 ```
