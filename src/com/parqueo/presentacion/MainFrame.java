@@ -10,7 +10,7 @@ public class MainFrame extends JFrame {
         ParqueoService service = new ParqueoService();
         PanelActivos panelActivos = new PanelActivos(service);
         PanelHistorial panelHistorial = new PanelHistorial(service);
-        PanelSalida panelSalida = new PanelSalida(service);
+        PanelSalida panelSalida = new PanelSalida(service, panelActivos, panelHistorial);
         PanelIngreso panelIngreso = new PanelIngreso(service, panelActivos);
 
         setTitle("Sistema de Parqueo Público");

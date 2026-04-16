@@ -1,6 +1,6 @@
 # Sistema de Gestión de Parqueo Público
 
-Aplicación de escritorio en Java Swing para registrar ingresos y consultar los vehículos activos en un parqueo público. El proyecto está preparado para abrirse en NetBeans y compilarse con Apache Ant.
+Aplicación de escritorio en Java Swing para registrar ingresos, salidas, cobros y consultar el historial de un parqueo público. El proyecto está preparado para abrirse en NetBeans y compilarse con Apache Ant.
 
 ## Instrucciones para abrir en NetBeans
 

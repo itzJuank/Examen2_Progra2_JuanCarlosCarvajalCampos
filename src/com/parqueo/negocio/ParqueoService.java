@@ -5,6 +5,8 @@ import com.parqueo.datos.VehiculoDAO;
 import com.parqueo.entidades.Registro;
 import com.parqueo.entidades.Vehiculo;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ParqueoService {
@@ -40,7 +42,30 @@ public class ParqueoService {
     }
 
     public Registro registrarSalida(String registroId) {
-        throw new UnsupportedOperationException("Disponible a partir de la versión 1.1");
+        List<Registro> activos = vehiculoDAO.obtenerActivos();
+        Registro encontrado = null;
+        List<Registro> restantes = new ArrayList<Registro>();
+        for (Registro registro : activos) {
+            if (registro.getId().equals(registroId)) {
+                encontrado = registro;
+            } else {
+                restantes.add(registro);
+            }
+        }
+
+        if (encontrado == null) {
+            throw new IllegalArgumentException("No se encontró un registro activo con el id indicado");
+        }
+
+        encontrado.setHoraSalida(LocalDateTime.now());
+        long minutos = ChronoUnit.MINUTES.between(encontrado.getHoraEntrada(), encontrado.getHoraSalida());
+        double horas = Math.ceil(minutos / 60.0);
+        encontrado.setMonto(Math.max(1, horas) * TARIFA_POR_HORA);
+        encontrado.setActivo(false);
+
+        vehiculoDAO.actualizarActivos(restantes);
+        registroDAO.guardarEnHistorial(encontrado);
+        return encontrado;
     }
 
     public List<Registro> obtenerActivos() {
