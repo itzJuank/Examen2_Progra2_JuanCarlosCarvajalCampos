@@ -4,6 +4,14 @@
 
 Aplicación de escritorio en Java Swing para registrar ingresos, salidas, cobros y consultar el historial de un parqueo público. El proyecto está preparado para abrirse en NetBeans y compilarse con Apache Ant.
 
+## Regla de validación de placas
+
+La placa debe cumplir estas condiciones:
+- Tener entre 5 y 8 caracteres
+- Contener al menos una letra y al menos un número
+- Usar solo letras mayúsculas, números o guion `-`
+- No incluir espacios
+
 ## Instrucciones para abrir en NetBeans
 
 1. Abrir NetBeans.
@@ -33,6 +41,8 @@ ant run
 ├── manifest.mf
 ├── nbproject/
 │   ├── project.properties
+│   ├── build-impl.xml
+│   └── genfiles.properties
 │   └── project.xml
 ├── prompts.txt
 └── src/

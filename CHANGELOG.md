@@ -1,5 +1,10 @@
 ## CHANGELOG
 
+### v1.2.1 - Ajustes de validación y sincronización con NetBeans
+- Validación de placa reforzada para aceptar solo formatos alfanuméricos válidos
+- Mensaje de error de placa actualizado para orientar al usuario
+- Archivos `nbproject` sincronizados con la configuración generada por NetBeans
+
 ### v1.2 - Mejoras de interfaz y validaciones
 - Mensajes de error y éxito con color directamente en los paneles (sin JOptionPane)
 - Confirmación de eliminación mediante JDialog personalizado
