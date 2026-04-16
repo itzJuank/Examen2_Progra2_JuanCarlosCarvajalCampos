@@ -1,4 +1,4 @@
-package com.parqueo.entidades;
+package parqueo.entidades;
 
 public class Vehiculo {
     private String placa;

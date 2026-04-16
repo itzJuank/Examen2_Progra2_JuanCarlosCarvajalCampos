@@ -1,8 +1,9 @@
-package com.parqueo.presentacion;
+package parqueo.presentacion;
 
-import com.parqueo.entidades.Registro;
-import com.parqueo.negocio.ParqueoService;
+import parqueo.entidades.Registro;
+import parqueo.negocio.ParqueoService;
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -23,6 +24,7 @@ public class PanelIngreso extends JPanel {
     private final JLabel lblHoraEntrada;
     private final JLabel lblMensaje;
     private final JLabel lblResumen;
+    private final JLabel lblEstadoVisual;
     private final Timer timerReloj;
 
     public PanelIngreso(ParqueoService service, PanelActivos panelActivos) {
@@ -46,6 +48,7 @@ public class PanelIngreso extends JPanel {
         lblHoraEntrada = EstilosUI.crearValorDestacado(EstilosUI.formatearFechaHora(LocalDateTime.now()));
         lblMensaje = new JLabel(" ");
         lblResumen = EstilosUI.crearChip("Listo para registrar", EstilosUI.COLOR_ACENTO_SUAVE, EstilosUI.COLOR_PRIMARIO_OSCURO);
+        lblEstadoVisual = EstilosUI.crearChip("Zona de ingreso activa", EstilosUI.COLOR_EXITO_SUAVE, EstilosUI.COLOR_EXITO);
         JButton btnRegistrar = new JButton("Registrar ingreso");
         btnRegistrar.addActionListener(e -> registrarIngreso());
         timerReloj = new Timer(1000, e -> actualizarReloj());
@@ -65,6 +68,9 @@ public class PanelIngreso extends JPanel {
         formulario.add(EstilosUI.crearSubtitulo("Registre la entrada del vehículo y actualice el parqueo en tiempo real."), gbc);
 
         gbc.gridy = 2;
+        formulario.add(lblEstadoVisual, gbc);
+
+        gbc.gridy = 3;
         gbc.gridwidth = 1;
         formulario.add(EstilosUI.crearEtiqueta("Placa"), gbc);
 
@@ -72,21 +78,21 @@ public class PanelIngreso extends JPanel {
         formulario.add(txtPlaca, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         formulario.add(EstilosUI.crearEtiqueta("Tipo de vehículo"), gbc);
 
         gbc.gridx = 1;
         formulario.add(cmbTipo, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 5;
         formulario.add(EstilosUI.crearEtiqueta("Hora actual"), gbc);
 
         gbc.gridx = 1;
         formulario.add(lblHoraEntrada, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = 6;
         gbc.gridwidth = 1;
         formulario.add(lblResumen, gbc);
 
@@ -95,13 +101,20 @@ public class PanelIngreso extends JPanel {
         formulario.add(btnRegistrar, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 6;
+        gbc.gridy = 7;
         gbc.gridwidth = 2;
         formulario.add(lblMensaje, gbc);
 
-        PanelTarjeta decorativo = new PanelTarjeta(new BorderLayout(), EstilosUI.COLOR_PANEL_SUAVE);
+        PanelTarjeta decorativo = new PanelTarjeta(new BorderLayout(0, 16), EstilosUI.COLOR_PANEL_SUAVE);
         decorativo.setBorder(new EmptyBorder(20, 20, 20, 20));
         decorativo.add(new PanelDecorativoIngreso(), BorderLayout.CENTER);
+
+        JPanel metricasLaterales = new JPanel(new GridLayout(2, 1, 0, 14));
+        metricasLaterales.setOpaque(false);
+        metricasLaterales.add(new TarjetaMetrica("Cobro mínimo", EstilosUI.formatearMonto(ParqueoService.TARIFA_POR_HORA),
+                "Se factura una hora como base", EstilosUI.COLOR_ACENTO));
+        metricasLaterales.add(new TarjetaMetrica("Formato de placa", "5 - 8", "Letras, números y sin espacios", EstilosUI.COLOR_SECUNDARIO));
+        decorativo.add(metricasLaterales, BorderLayout.SOUTH);
 
         JPanel contenido = new JPanel(new BorderLayout(18, 0));
         contenido.setOpaque(false);
@@ -119,11 +132,13 @@ public class PanelIngreso extends JPanel {
             EstilosUI.mostrarMensajeExito(lblMensaje, "Ingreso registrado correctamente");
             lblHoraEntrada.setText(EstilosUI.formatearFechaHora(registro.getHoraEntrada()));
             lblResumen.setText("Activo: " + registro.getVehiculo().getPlaca());
+            lblEstadoVisual.setText("Espacio asignado");
             txtPlaca.setText("");
             cmbTipo.setSelectedIndex(0);
             panelActivos.refrescarTabla();
         } catch (Exception ex) {
             lblResumen.setText("Revisión requerida");
+            lblEstadoVisual.setText("Validación pendiente");
             EstilosUI.mostrarMensajeError(lblMensaje, ex.getMessage());
         }
     }

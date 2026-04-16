@@ -1,7 +1,7 @@
-package com.parqueo.presentacion;
+package parqueo.presentacion;
 
-import com.parqueo.entidades.Registro;
-import com.parqueo.negocio.ParqueoService;
+import parqueo.entidades.Registro;
+import parqueo.negocio.ParqueoService;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;

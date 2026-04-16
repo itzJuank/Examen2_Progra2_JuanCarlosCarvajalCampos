@@ -4,7 +4,7 @@
     <property name="build.dir" value="build"/>
     <property name="classes.dir" value="${build.dir}/classes"/>
     <property name="dist.dir" value="dist"/>
-    <property name="main.class" value="com.parqueo.presentacion.MainFrame"/>
+    <property name="main.class" value="parqueo.presentacion.MainFrame"/>
 
     <target name="clean">
         <delete dir="${build.dir}"/>

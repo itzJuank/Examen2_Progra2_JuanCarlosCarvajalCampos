@@ -1,6 +1,6 @@
-package com.parqueo.negocio;
+package parqueo.negocio;
 
-import com.parqueo.entidades.Registro;
+import parqueo.entidades.Registro;
 import java.util.List;
 import java.util.regex.Pattern;
 

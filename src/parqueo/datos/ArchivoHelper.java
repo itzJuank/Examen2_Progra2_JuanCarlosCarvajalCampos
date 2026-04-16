@@ -1,4 +1,4 @@
-package com.parqueo.datos;
+package parqueo.datos;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

@@ -1,4 +1,4 @@
-package com.parqueo.presentacion;
+package parqueo.presentacion;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -50,6 +50,7 @@ public final class EstilosUI {
     public static final Font FUENTE_BOTON = new Font("Segoe UI", Font.BOLD, 14);
     public static final Font FUENTE_TABS = new Font("Segoe UI", Font.BOLD, 13);
     public static final Font FUENTE_TABLA = new Font("Segoe UI", Font.PLAIN, 13);
+    public static final Font FUENTE_METRICA = new Font("Segoe UI", Font.BOLD, 24);
     private static final DecimalFormat FORMATO_MONTO = new DecimalFormat("#,##0.00");
     private static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss a");
 
@@ -114,7 +115,7 @@ public final class EstilosUI {
         campo.setCaretColor(COLOR_PRIMARIO_OSCURO);
         campo.setBackground(COLOR_PANEL);
         campo.setBorder(crearBordeCampo());
-        campo.setMargin(new Insets(8, 10, 8, 10));
+        campo.setMargin(new Insets(10, 12, 10, 12));
     }
 
     public static void configurarCombo(JComboBox<String> combo) {
@@ -161,6 +162,7 @@ public final class EstilosUI {
         tabla.setSelectionBackground(COLOR_SELECCION);
         tabla.setSelectionForeground(COLOR_TEXTO);
         tabla.setBackground(COLOR_PANEL);
+        tabla.setOpaque(false);
 
         JTableHeader encabezado = tabla.getTableHeader();
         encabezado.setFont(new Font("Segoe UI", Font.BOLD, 13));
@@ -198,6 +200,7 @@ public final class EstilosUI {
         JScrollPane scroll = new JScrollPane(tabla);
         scroll.setBorder(BorderFactory.createLineBorder(COLOR_BORDE));
         scroll.getViewport().setBackground(COLOR_PANEL);
+        scroll.setOpaque(false);
         return scroll;
     }
 

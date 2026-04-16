@@ -1,7 +1,7 @@
-package com.parqueo.datos;
+package parqueo.datos;
 
-import com.parqueo.entidades.Registro;
-import com.parqueo.entidades.Vehiculo;
+import parqueo.entidades.Registro;
+import parqueo.entidades.Vehiculo;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

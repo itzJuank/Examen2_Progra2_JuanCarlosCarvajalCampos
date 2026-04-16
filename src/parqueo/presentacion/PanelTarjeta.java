@@ -1,4 +1,4 @@
-package com.parqueo.presentacion;
+package parqueo.presentacion;
 
 import java.awt.Color;
 import java.awt.Graphics;

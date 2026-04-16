@@ -1,5 +1,11 @@
 ## CHANGELOG
 
+### v1.3 - Dashboard visual y simplificación de paquete raíz
+- El paquete raíz pasó de `com.parqueo` a `parqueo`
+- La interfaz principal ahora incluye tarjetas de métricas en vivo
+- Se modernizó la pestaña de ingreso con un panel visual más tipo dashboard
+- Se mantuvo el formato de fecha de 12 horas y el reloj en vivo en presentación
+
 ### v1.2.2 - Eliminación de metadatos de NetBeans
 - Se eliminó la carpeta `nbproject` del repositorio
 - `build.xml` volvió a una configuración Ant independiente

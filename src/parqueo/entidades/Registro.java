@@ -1,4 +1,4 @@
-package com.parqueo.entidades;
+package parqueo.entidades;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

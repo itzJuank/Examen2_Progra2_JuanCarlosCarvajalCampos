@@ -2,7 +2,7 @@
 
 ## Sistema de Gestión de Parqueo Público
 
-Aplicación de escritorio en Java Swing para registrar ingresos, salidas, cobros y consultar el historial de un parqueo público. El proyecto queda como aplicación Java standalone compilable con Apache Ant.
+Aplicación de escritorio en Java Swing para registrar ingresos, salidas, cobros y consultar el historial de un parqueo público. El proyecto queda como aplicación Java standalone compilable con Apache Ant, con una interfaz estilo dashboard.
 
 ## Regla de validación de placas
 
@@ -34,9 +34,9 @@ ant run
 ├── manifest.mf
 ├── prompts.txt
 └── src/
-    └── com/parqueo/
+    └── parqueo/
         ├── datos/
-            │   ├── ArchivoHelper.java
+        │   ├── ArchivoHelper.java
         │   ├── RegistroDAO.java
         │   └── VehiculoDAO.java
         ├── entidades/
@@ -52,6 +52,7 @@ ant run
             ├── PanelDecorativoIngreso.java
             ├── PanelHistorial.java
             ├── PanelIngreso.java
+            ├── TarjetaMetrica.java
             ├── PanelTarjeta.java
             └── PanelSalida.java
 ```

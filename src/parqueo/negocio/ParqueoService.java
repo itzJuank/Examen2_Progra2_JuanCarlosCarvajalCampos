@@ -1,9 +1,9 @@
-package com.parqueo.negocio;
+package parqueo.negocio;
 
-import com.parqueo.datos.RegistroDAO;
-import com.parqueo.datos.VehiculoDAO;
-import com.parqueo.entidades.Registro;
-import com.parqueo.entidades.Vehiculo;
+import parqueo.datos.RegistroDAO;
+import parqueo.datos.VehiculoDAO;
+import parqueo.entidades.Registro;
+import parqueo.entidades.Vehiculo;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
