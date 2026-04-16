@@ -1,4 +1,6 @@
-# Sistema de Gestión de Parqueo Público
+# Examen2_Progra2_JuanCarlosCarvajalCampos
+
+## Sistema de Gestión de Parqueo Público
 
 Aplicación de escritorio en Java Swing para registrar ingresos, salidas, cobros y consultar el historial de un parqueo público. El proyecto está preparado para abrirse en NetBeans y compilarse con Apache Ant.
 
