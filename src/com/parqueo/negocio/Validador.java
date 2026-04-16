@@ -2,13 +2,22 @@ package com.parqueo.negocio;
 
 import com.parqueo.entidades.Registro;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Validador {
+    private static final Pattern PATRON_PLACA = Pattern.compile("^(?=.{5,8}$)(?=.*[A-Z])(?=.*\\d)[A-Z0-9-]+$");
+
     private Validador() {
     }
 
     public static boolean placaValida(String placa) {
-        return placa != null && !placa.trim().isEmpty();
+        if (placa == null) {
+            return false;
+        }
+        String placaNormalizada = placa.trim().toUpperCase();
+        return !placaNormalizada.isEmpty()
+                && !placaNormalizada.contains(" ")
+                && PATRON_PLACA.matcher(placaNormalizada).matches();
     }
 
     public static boolean tipoValido(String tipo) {

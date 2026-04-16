@@ -22,7 +22,7 @@ public class ParqueoService {
     public Registro registrarIngreso(String placa, String tipo) {
         String placaNormalizada = placa == null ? null : placa.trim().toUpperCase();
         if (!Validador.placaValida(placaNormalizada)) {
-            throw new IllegalArgumentException("La placa es obligatoria");
+            throw new IllegalArgumentException("La placa es inválida. Use 5 a 8 caracteres con letras y números, sin espacios");
         }
         if (!Validador.tipoValido(tipo)) {
             throw new IllegalArgumentException("El tipo de vehículo es inválido");
