@@ -10,7 +10,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -22,7 +21,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.border.EmptyBorder;
 
 public class PanelHistorial extends JPanel {
-    private static final DateTimeFormatter FORMATO = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     private final ParqueoService service;
     private final DefaultTableModel modelo;
     private final JTable tabla;
@@ -107,8 +105,8 @@ public class PanelHistorial extends JPanel {
                 registro.getId(),
                 registro.getVehiculo().getPlaca(),
                 registro.getVehiculo().getTipo(),
-                registro.getHoraEntrada().format(FORMATO),
-                registro.getHoraSalida() == null ? "" : registro.getHoraSalida().format(FORMATO),
+                EstilosUI.formatearFechaHora(registro.getHoraEntrada()),
+                EstilosUI.formatearFechaHora(registro.getHoraSalida()),
                 EstilosUI.formatearMonto(registro.getMonto())
             });
         }

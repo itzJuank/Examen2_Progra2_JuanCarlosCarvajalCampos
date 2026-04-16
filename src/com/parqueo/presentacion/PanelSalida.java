@@ -5,7 +5,6 @@ import com.parqueo.negocio.ParqueoService;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -15,7 +14,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.border.EmptyBorder;
 
 public class PanelSalida extends JPanel {
-    private static final DateTimeFormatter FORMATO = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     private final ParqueoService service;
     private final PanelActivos panelActivos;
     private final PanelHistorial panelHistorial;
@@ -107,7 +105,7 @@ public class PanelSalida extends JPanel {
                 registro.getId(),
                 registro.getVehiculo().getPlaca(),
                 registro.getVehiculo().getTipo(),
-                registro.getHoraEntrada().format(FORMATO)
+                EstilosUI.formatearFechaHora(registro.getHoraEntrada())
             });
         }
         lblResumen.setText(activos.size() + (activos.size() == 1 ? " pendiente" : " pendientes"));

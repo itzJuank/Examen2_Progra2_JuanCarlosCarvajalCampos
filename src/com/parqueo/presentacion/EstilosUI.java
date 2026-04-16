@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
 import java.text.DecimalFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -49,6 +51,7 @@ public final class EstilosUI {
     public static final Font FUENTE_TABS = new Font("Segoe UI", Font.BOLD, 13);
     public static final Font FUENTE_TABLA = new Font("Segoe UI", Font.PLAIN, 13);
     private static final DecimalFormat FORMATO_MONTO = new DecimalFormat("#,##0.00");
+    private static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss a");
 
     private EstilosUI() {
     }
@@ -228,6 +231,10 @@ public final class EstilosUI {
 
     public static String formatearMonto(double monto) {
         return "₡" + FORMATO_MONTO.format(monto);
+    }
+
+    public static String formatearFechaHora(LocalDateTime fecha) {
+        return fecha == null ? "" : fecha.format(FORMATO_FECHA);
     }
 
     private static void aplicarMensaje(JLabel lbl, String mensaje, Color texto, Color fondo) {

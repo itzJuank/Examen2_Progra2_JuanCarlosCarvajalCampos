@@ -80,7 +80,10 @@ public class MainFrame extends JFrame {
 
         JPanel indicadores = new JPanel(new BorderLayout());
         indicadores.setOpaque(false);
-        JLabel chip = EstilosUI.crearChip("NetBeans + Swing + Ant", EstilosUI.COLOR_ACENTO, EstilosUI.COLOR_TEXTO);
+        JLabel chip = EstilosUI.crearChip(
+                "Tarifa por hora: " + EstilosUI.formatearMonto(ParqueoService.TARIFA_POR_HORA),
+                EstilosUI.COLOR_ACENTO,
+                EstilosUI.COLOR_TEXTO);
         indicadores.add(chip, BorderLayout.NORTH);
 
         encabezado.add(textos, BorderLayout.CENTER);
