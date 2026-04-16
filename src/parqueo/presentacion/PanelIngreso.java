@@ -3,7 +3,6 @@ package parqueo.presentacion;
 import parqueo.entidades.Registro;
 import parqueo.negocio.ParqueoService;
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -105,16 +104,9 @@ public class PanelIngreso extends JPanel {
         gbc.gridwidth = 2;
         formulario.add(lblMensaje, gbc);
 
-        PanelTarjeta decorativo = new PanelTarjeta(new BorderLayout(0, 16), EstilosUI.COLOR_PANEL_SUAVE);
+        PanelTarjeta decorativo = new PanelTarjeta(new BorderLayout(), EstilosUI.COLOR_PANEL_SUAVE);
         decorativo.setBorder(new EmptyBorder(20, 20, 20, 20));
         decorativo.add(new PanelDecorativoIngreso(), BorderLayout.CENTER);
-
-        JPanel metricasLaterales = new JPanel(new GridLayout(2, 1, 0, 14));
-        metricasLaterales.setOpaque(false);
-        metricasLaterales.add(new TarjetaMetrica("Cobro mínimo", EstilosUI.formatearMonto(ParqueoService.TARIFA_POR_HORA),
-                "Se factura una hora como base", EstilosUI.COLOR_ACENTO));
-        metricasLaterales.add(new TarjetaMetrica("Formato de placa", "5 - 8", "Letras, números y sin espacios", EstilosUI.COLOR_SECUNDARIO));
-        decorativo.add(metricasLaterales, BorderLayout.SOUTH);
 
         JPanel contenido = new JPanel(new BorderLayout(18, 0));
         contenido.setOpaque(false);
